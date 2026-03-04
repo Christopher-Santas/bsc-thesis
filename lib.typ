@@ -1,3 +1,14 @@
+#import "@preview/zero:0.5.0": num, ztable, zi, set-num, set-round, set-unit
+#import "@preview/typsium:0.3.1": ce
+#import "@preview/alchemist:0.1.8": *
+
+#let kg = zi.declare("kg")
+#let mL = zi.declare("mL")
+#let gr = zi.declare("g")
+
+#let MeOH = ce("MeOH")
+#let Hex = "Εξάνιο"
+
 // This function gets your whole document as its `body` and formats
 // it as an article in the style of the IEEE.
 #let ieee_custom(
@@ -33,7 +44,7 @@
 
   // Set language to Greek
   set text(lang: "el")
-
+  
   // Set the body font.
   // As of 2024-08, the IEEE LaTeX template uses wider interword spacing
   // - See e.g. the definition \def\@IEEEinterspaceratioM{0.35} in IEEEtran.cls
@@ -235,6 +246,12 @@
     }
     v(2pt)
   }
+
+  set table(
+    align: center + horizon,
+    fill: (_, y) => if calc.even(y) { rgb("EAF2F5") },
+    stroke: (_, y) => if y == 0 { (bottom: 1pt) }
+  )
 
   // Display the paper's contents.
   body
