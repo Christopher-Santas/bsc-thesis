@@ -5,6 +5,8 @@
 #let kg = zi.declare("kg")
 #let mL = zi.declare("mL")
 #let gr = zi.declare("g")
+#let mugmL = zi.declare("mug/mL")
+#let ngmL = zi.declare("ng/mL")
 
 #let MeOH = ce("MeOH")
 #let Hex = "Εξάνιο"
@@ -34,7 +36,7 @@
 
   // How figures are referred to from within the text.
   // Use "Figure" instead of "Fig." for computer-related publications.
-  figure-supplement: [Fig.],
+  figure-supplement: [Σχήμα],
 
   // The paper's content.
   body
@@ -52,26 +54,26 @@
   set text(size: 10pt, spacing: .35em)
 
   // Enums numbering
-  set enum(numbering: "1)a)i)")
+  set enum(numbering: "1)α)i)")
 
   // Tables & figures
   show figure: set block(spacing: 15.5pt)
   show figure: set place(clearance: 15.5pt)
-  show figure.where(kind: table): set figure.caption(position: top, separator: [\ ])
-  show figure.where(kind: table): set text(size: 8pt)
-  show figure.where(kind: table): set figure(numbering: "I")
+  // show figure.where(kind: table): set figure.caption(position: top, separator: [\ ])
+  // show figure.where(kind: table): set text(size: 8pt)
+  // show figure.where(kind: table): set figure(numbering: "I")
   show figure.where(kind: image): set figure(supplement: figure-supplement, numbering: "1")
   show figure.caption: set text(size: 8pt)
   show figure.caption: set align(start)
-  show figure.caption.where(kind: table): set align(center)
+  // show figure.caption.where(kind: table): set align(center)
 
   // Adapt supplement in caption independently from supplement used for
   // references.
   set figure.caption(separator: [. ])
   show figure: fig => {
     let prefix = (
-      if fig.kind == table [TABLE]
-      else if fig.kind == image [Fig.]
+      if fig.kind == table [Πίνακας]
+      else if fig.kind == image [Εικόνα]
       else [#fig.supplement]
     )
     let numbers = numbering(fig.numbering, ..fig.counter.at(fig.location()))
@@ -131,7 +133,7 @@
   set list(indent: 10pt, body-indent: 9pt)
 
   // Configure headings.
-  set heading(numbering: "I.A.a)")
+  set heading(numbering: "I.Α.α)")
   show heading: it => {
     // Find out the final number of the heading counter.
     let levels = counter(heading).get()
@@ -160,14 +162,14 @@
       set text(style: "italic")
       show: block.with(spacing: 10pt, sticky: true)
       if it.numbering != none {
-        numbering("A.", deepest)
+        numbering("Α.", deepest)
         h(7pt, weak: true)
       }
       it.body
     } else [
       // Third level headings are run-ins too, but different.
       #if it.level == 3 {
-        numbering("a)", deepest)
+        numbering("α)", deepest)
         [ ]
       }
       _#(it.body):_
