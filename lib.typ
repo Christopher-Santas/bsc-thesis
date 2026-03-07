@@ -1,6 +1,11 @@
 #import "@preview/zero:0.5.0": num, ztable, zi, set-num, set-round, set-unit
 #import "@preview/typsium:0.3.1": ce
 #import "@preview/alchemist:0.1.8": *
+#import "@preview/sicons:16.0.0": sicon
+
+#let ekpa = "Εθνικό Καποδιστριακό Πανεπιστήμιο Αθηνών"
+#let chemdept = "Τμήμα Χημείας"
+#let athens = "Αθήνα, Ελλάδα"
 
 #let kg = zi.declare("kg")
 #let mL = zi.declare("mL")
@@ -66,21 +71,21 @@
   show figure.caption: set text(size: 8pt)
   show figure.caption: set align(start)
   // show figure.caption.where(kind: table): set align(center)
-
+  
   // Adapt supplement in caption independently from supplement used for
   // references.
   set figure.caption(separator: [. ])
   show figure: fig => {
     let prefix = (
       if fig.kind == table [Πίνακας]
-      else if fig.kind == image [Εικόνα]
+      else if fig.kind == image [Σχήμα]
       else [#fig.supplement]
     )
     let numbers = numbering(fig.numbering, ..fig.counter.at(fig.location()))
     // Wrap figure captions in block to prevent the creation of paragraphs. In
     // particular, this means `par.first-line-indent` does not apply.
     // See https://github.com/typst/templates/pull/73#discussion_r2112947947.
-    show figure.caption: it => block[#prefix~#numbers#it.separator#it.body]
+    show figure.caption: it => block[*#prefix~#numbers#it.separator*#it.body]
     show figure.caption.where(kind: table): smallcaps
     fig
   }
@@ -98,6 +103,7 @@
   set page(
     columns: 2,
     paper: paper-size,
+    numbering: "1",
     // The margins depend on the paper size.
     margin: if paper-size == "a4" {
       (x: 41.5pt, top: 80.51pt, bottom: 89.51pt)
@@ -179,7 +185,7 @@
   // Style bibliography.
   show std.bibliography: set text(8pt)
   show std.bibliography: set block(spacing: 0.5em)
-  set std.bibliography(title: text(10pt)[Βιβλιογραφία], style: "ieee")
+  set std.bibliography(title: [Βιβλιογραφία], style: "ieee")
 
   // Display the paper's title and authors at the top of the page,
   // spanning all columns (hence floating at the scope of the
@@ -249,6 +255,7 @@
     v(2pt)
   }
 
+  show table.cell.where(y: 0): strong
   set table(
     align: center + horizon,
     fill: (_, y) => if calc.even(y) { rgb("EAF2F5") },
@@ -259,5 +266,19 @@
   body
 
   // Display bibliography.
+  outline(title: "Σχήματα", target: figure.where(kind: image))
+  outline(title: "Πίνακες", target: figure.where(kind: table))
   bibliography
+
+  v(1em)
+  align(center,
+    link("https://typst.app/",
+      box(stroke: 0.5pt + gray, inset: 5pt, radius: 3pt,
+        grid(columns: 2, gutter: 5pt, align: center + horizon,
+          sicon(size: 2em),
+          text(weight: "bold", size: 14pt)[Made with Typst]
+        )
+      )
+    )
+  )
 }
