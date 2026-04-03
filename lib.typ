@@ -1,51 +1,76 @@
 #import "@preview/zero:0.5.0": num, ztable, zi, set-num, set-round, set-unit
 #import "@preview/typsium:0.3.1": ce
 #import "@preview/alchemist:0.1.8": *
+#import "@preview/lilaq:0.6.0" as lq
 #import "@preview/sicons:16.0.0": sicon
 
+#let title = [Χημικός Χαρακτηρισμός Αερολυμάτων από Ελαστικά Οχημάτων]
+#let abstract = [TODO]
+#let names = (
+  "Χριστόφορος Σάντας",
+  "Ιωάννης Στύλιος",
+)
+#let emails = (
+  "sch2200080@uoa.gr",
+  "sch2200088@uoa.gr"
+)
 #let ekpa = "Εθνικό Καποδιστριακό Πανεπιστήμιο Αθηνών"
 #let chemdept = "Τμήμα Χημείας"
 #let athens = "Αθήνα, Ελλάδα"
+#let authors = (
+    (
+      name: names.at(0),
+      department: chemdept,
+      organization: ekpa,
+      location: athens,
+      email: emails.at(0)
+    ),
+    (
+      name: names.at(1),
+      department: chemdept,
+      organization: ekpa,
+      location: athens,
+      email: emails.at(1)
+    ),
+)
+#let figure-supplement = [Σχήμα]
+#let paper-size = "a4"
+#let index-terms = ("Χημεία Περιβάλλοντος", "Ρύποι από Ελαστικά Οχημάτων", "Σκόνη από οδόστρωμα", "TRECs", "TWPs", "TWCs", "Κινόνες", "Βενζοτριαζόλες")
+#let bibliography = bibliography("refs.bib")
 
+#let V = zi.declare("V")
+#let mum = zi.declare("mum")
 #let kg = zi.declare("kg")
 #let mL = zi.declare("mL")
+#let muL = zi.declare("muL")
+#let mg = zi.declare("mg")
 #let gr = zi.declare("g")
 #let mugmL = zi.declare("mug/mL")
 #let ngmL = zi.declare("ng/mL")
 
 #let MeOH = ce("MeOH")
-#let Hex = "Εξάνιο"
+#let HPLC = "HPLC-QToF/MS"
+
+#let C_6PPD(long: false) = if long [6PPD] else [6PPD]
+#let C_6PPD-Q(long: false) = if long [6PPD-quinone] else [6PPD-Q]
+#let C_DPPD-Q(long: false) = if long [DPPD-quinone] else [DPPD-Q]
+#let C_CPPD-Q(long: false) = if long [CPPD-quinone] else [CPPD-Q]
+#let C_6PPD-Q-d5(long: false) = if long [6PPD-quinone-d5] else [6PPD-Q-d5]
+#let C_1OH-BTR(long: false) = if long [1-hydroxybenzotriazole] else [1-OH-BTR]
+#let C_4OH-BTR(long: false) = if long [4-hydroxy-benzotriazole] else [4-OH-BTR]
+#let C_4TTR(long: false) = if long [4-methyl-1H-benzotriazole] else [4-TTR]
+#let C_5TTR(long: false) = if long [5-methyl-1H-benzotriazole] else [5-TTR]
+#let C_5Cl-BTR(long: false) = if long [5-Chlorobenzotriazole1] else [5-Cl-BTR]
+#let C_56Me-1H-BTR(long: false) = if long [5,6-dimethyl-1H-benzotriazole] else [5,6-Me-1H-BTR]
+#let C_BTR(long: false) = if long [Benzotriazole] else [BTR]
+#let C_BTR-COOH(long: false) = if long [benzotriazole-5-carboxyl acid] else [BTR-COOH]
+#let C_5ABTR(long: false) = if long [5-amino-1H-benzotriazole] else [5-ABTR]
+#let C_TBHB(long: false) = if long [2-(5-tert-Butyl-2-hydroxyphenyl) benzotriazole] else [TBHB]
+#let C_BTR-d4(long: false) = if long [Benzotriazole-d4] else [BTR-d4]
 
 // This function gets your whole document as its `body` and formats
 // it as an article in the style of the IEEE.
-#let ieee_custom(
-  // The paper's title.
-  title: [Paper Title],
-
-  // An array of authors. For each author you can specify a name,
-  // department, organization, location, and email. Everything but
-  // but the name is optional.
-  authors: (),
-
-  // The paper's abstract. Can be omitted if you don't have one.
-  abstract: none,
-
-  // A list of index terms to display after the abstract.
-  index-terms: (),
-
-  // The article's paper size. Also affects the margins.
-  paper-size: "a4",
-
-  // The result of a call to the `bibliography` function or `none`.
-  bibliography: none,
-
-  // How figures are referred to from within the text.
-  // Use "Figure" instead of "Fig." for computer-related publications.
-  figure-supplement: [Σχήμα],
-
-  // The paper's content.
-  body
-) = {
+#let fmt(body) = {
   // Set document metadata.
   set document(title: title, author: authors.map(author => author.name))
 
@@ -56,7 +81,7 @@
   // As of 2024-08, the IEEE LaTeX template uses wider interword spacing
   // - See e.g. the definition \def\@IEEEinterspaceratioM{0.35} in IEEEtran.cls
   // set text(font: "TeX Gyre Termes", size: 10pt, spacing: .35em)
-  set text(size: 10pt, spacing: .35em)
+  set text(size: 11pt, spacing: .35em)
 
   // Enums numbering
   set enum(numbering: "1)α)i)")
@@ -183,7 +208,7 @@
   }
 
   // Style bibliography.
-  show std.bibliography: set text(8pt)
+  show std.bibliography: set text(10pt)
   show std.bibliography: set block(spacing: 0.5em)
   set std.bibliography(title: [Βιβλιογραφία], style: "ieee")
 
