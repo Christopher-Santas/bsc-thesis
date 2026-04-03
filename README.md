@@ -1,0 +1,37 @@
+= BSc Thesis on Environmental Chemistry: Chemical Characterization of pollutants emerging from vehicle tyrewear
+
+== Authors
+
+Christopher Santas, Ioannis Stylios
+
+== Abstract:
+
+TODO
+
+== Slides
+
+You can view the presentation for this thesis here TODO.
+
+== Build instructions
+
+TODO (uv & typst as deps, build with just)
+
+== FAQ
+
+=== Why are both code and assets all in the root folder?
+
+We considered moving code and assets to respective folders, but our tooling limited that capability.
+
+=== Why is your thesis in Greek?
+
+While both of us have Proficiency Certificates in English, Greek is encouraged for BSc thesis in NKUA (National Kapodistrian University of Athens). Terminology is taught and used in Greek, despite the many English citations.
+
+=== Why did you use Typst?
+
+[Typst](https://typst.app) is a successor to LaTeX, significantly improving on error messages, readability and package management. Written in Rust, it's blazing fast and has allowed us to create our thesis with little to no friction.
+It's adaptable and easy-to-use layout along with the refactorization abilities help produce documents of professional standards. Besides, there is already ongoing effort in [supporting Typst in arXiv](https://youtu.be/zNZlAbCOjd8).
+
+== License
+
+TODO (CC BY-NC 4.0 for text and MPL 2.0 for code)
+
