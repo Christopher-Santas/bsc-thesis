@@ -138,7 +138,9 @@
         top: (55pt / 279mm) * 100%,
         bottom: (64pt / 279mm) * 100%,
       )
-    }
+    },
+    // Bad attempt at fixing broken footer height
+    // footer-descent: 0%+3em,
   )
 
   // Configure equation numbering and spacing.
