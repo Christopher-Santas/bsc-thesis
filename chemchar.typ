@@ -26,6 +26,8 @@
 #let skeletons = (
   (C_6PPD(), S_6PPD),
   (C_6PPD-Q(), S_6PPD-Q),
+  (C_DPPD-Q(), S_DPPD-Q),
+  (C_CPPD-Q(), S_CPPD-Q),
   (C_BTR(), S_BTR),
   (C_BTR-COOH(), S_BTR-COOH),
   (C_5ABTR(), S_5ABTR),
@@ -36,8 +38,6 @@
   (C_5TTR(), S_5TTR),
   (C_5Cl-BTR(), S_5Cl-BTR),
   (C_56Me-1H-BTR(), S_56Me-1H-BTR),
-  (C_DPPD-Q(), S_DPPD-Q),
-  (C_CPPD-Q(), S_CPPD-Q),
 )
 
 #let skel_table = table(
