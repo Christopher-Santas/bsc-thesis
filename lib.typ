@@ -1,11 +1,12 @@
-#import "@preview/zero:0.5.0": num, ztable, zi, set-num, set-round, set-unit
+#import "@preview/zero:0.5.0": num, ztable, zi, set-num, set-round, set-unit, set-group
 #import "@preview/typsium:0.3.1": ce
 #import "@preview/alchemist:0.1.8": *
 #import "@preview/lilaq:0.6.0" as lq
+#import "@preview/oasis-align:0.3.3": *
 #import "@preview/sicons:16.0.0": sicon
 
-#let title = [Χημικός Χαρακτηρισμός Αερολυμάτων από Ελαστικά Οχημάτων]
-#let abstract = [TODO]
+#let title = [Χημικός Χαρακτηρισμός Αιωρούμενων Ατμοσφαιρικών Σωματιδίων]
+#let abstract = [#lorem(200)]
 #let names = (
   "Χριστόφορος Σάντας",
   "Ιωάννης Στύλιος",
@@ -47,6 +48,7 @@
 #let gr = zi.declare("g")
 #let mugmL = zi.declare("mug/mL")
 #let ngmL = zi.declare("ng/mL")
+#let mgL = zi.declare("mg/L")
 
 #let MeOH = ce("MeOH")
 #let HPLC = "HPLC-QToF/MS"
@@ -128,7 +130,6 @@
   set page(
     columns: 2,
     paper: paper-size,
-    numbering: "1",
     // The margins depend on the paper size.
     margin: if paper-size == "a4" {
       (x: 41.5pt, top: 80.51pt, bottom: 89.51pt)
@@ -239,7 +240,7 @@
           columns: slice.len() * (1fr,),
           gutter: 12pt,
           ..slice.map(author => align(center, {
-            text(size: 11pt, author.name)
+            text(size: 12pt, author.name)
             if "department" in author [
               \ #emph(author.department)
             ]
@@ -265,6 +266,16 @@
       }
     }
   )
+
+  place(center+top, scope: "parent", float: true)[
+    #align(center+horizon, grid(inset: 1em,
+      image("nkua_1.svg", width: 70%),
+      image("nkua_2.svg", width: 70%)
+    ))
+  ]
+  
+  set page(numbering: "1")
+  page(columns: 1, outline())
 
   set par(justify: true, first-line-indent: (amount: 1em, all: true), spacing: 0.5em, leading: 0.5em)
 
