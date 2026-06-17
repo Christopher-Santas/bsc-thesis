@@ -311,10 +311,17 @@
   v(1em)
   align(center,
     link("https://typst.app/",
-      box(stroke: 0.5pt + gray, inset: 5pt, radius: 3pt,
+      box(stroke: 1pt + gray, inset: 5pt, radius: 5pt,
         grid(columns: 2, gutter: 5pt, align: center + horizon,
-          sicon(size: 2em),
-          text(weight: "bold", size: 14pt)[Made with Typst]
+          rect(
+            inset: 8pt,
+            radius: 8pt,
+            // stroke: 4pt + gradient.linear(green, blue),
+            fill: rgb("239DAD"),
+            // text(size: 48pt, weight: "black", fill: blue, [$"S"_"L"$])
+            sicon(size: 2em, icon-color: "white"),
+          ),
+          [#text(weight: "bold", size: 16pt)[Made with Typst]\ #text(9pt)[_The new foundation for documents_]]
         )
       )
     )
