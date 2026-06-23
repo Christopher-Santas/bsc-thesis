@@ -1,4 +1,4 @@
-#import "lib.typ": *
+#import "../lib.typ": *
 #import "skel.typ": *
 
 // #let character = ztable(

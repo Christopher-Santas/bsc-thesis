@@ -1,4 +1,4 @@
-#import "lib.typ": *
+#import "../lib.typ": *
 
 #let blob(pos, label, tint: white, ..args) = node(
 	pos, align(center, label),

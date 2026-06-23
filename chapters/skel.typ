@@ -1,4 +1,4 @@
-#import "lib.typ": *
+#import "../lib.typ": *
 
 #let myatomsep = 2em
 #let mystroke = 1pt

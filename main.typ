@@ -2,11 +2,11 @@
 
 #show: fmt
 
-#include "intro.typ"
-#include "sourcesink.typ"
-#include "chemchar.typ"
-#include "toxic.typ"
-#include "organology.typ"
-#include "sampling.typ"
-#include "method.typ"
-#include "conclusion.typ"
+#include "chapters/intro.typ"
+#include "chapters/sourcesink.typ"
+#include "chapters/chemchar.typ"
+#include "chapters/toxic.typ"
+#include "chapters/organology.typ"
+#include "chapters/sampling.typ"
+#include "chapters/method.typ"
+#include "chapters/conclusion.typ"

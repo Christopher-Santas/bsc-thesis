@@ -14,13 +14,12 @@ You can view the presentation for this thesis here TODO.
 
 == Build instructions
 
-TODO (uv & typst as deps, build with just)
+```bash
+nix develop
+just compile
+```
 
 == FAQ
-
-=== Why are both code and assets all in the root folder?
-
-We considered moving code and assets to respective folders, but our tooling limited that capability.
 
 === Why is your thesis in Greek?
 
