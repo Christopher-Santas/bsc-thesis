@@ -4,6 +4,8 @@
 #import "@preview/lilaq:0.6.0" as lq
 #import "@preview/oasis-align:0.3.3": *
 #import "@preview/sicons:16.0.0": sicon
+#import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge
+#import fletcher.shapes: house, circle
 
 #let title = [Χημικός Χαρακτηρισμός Αιωρούμενων Ατμοσφαιρικών Σωματιδίων]
 #let abstract = [#lorem(200)]
