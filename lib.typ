@@ -140,6 +140,11 @@
         bottom: (64pt / 279mm) * 100%,
       )
     },
+    background: rotate(-45deg,
+      text(138pt, fill: rgb("cccccc"))[
+        *DRAFT*
+      ]
+    ),
     // Bad attempt at fixing broken footer height
     // footer-descent: 0%+3em,
   )
