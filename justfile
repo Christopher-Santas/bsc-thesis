@@ -7,3 +7,6 @@ compile:
 
 watch:
     typst watch --font-path fonts main.typ "{{ FILENAME }}"
+
+python:
+    distrobox enter archlinux -- uv run python/main.py
