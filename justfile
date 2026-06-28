@@ -9,4 +9,4 @@ watch:
     typst watch --font-path fonts main.typ "{{ FILENAME }}"
 
 python:
-    distrobox enter archlinux -- uv run python/main.py
+    distrobox enter archlinux -- uv run --directory python main.py
