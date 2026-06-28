@@ -76,6 +76,23 @@
 #let C_TBHB(long: false) = if long [2-(5-tert-Butyl-2-hydroxyphenyl) benzotriazole] else [TBHB]
 #let C_BTR-d4(long: false) = if long [Benzotriazole-d4] else [BTR-d4]
 
+#let C_ALL(long: false) = (
+  C_6PPD(long: long),
+  C_6PPD-Q(long: long),
+  C_DPPD-Q(long: long),
+  C_CPPD-Q(long: long),
+  C_1OH-BTR(long: long),
+  C_4OH-BTR(long: long),
+  C_4TTR(long: long),
+  C_5TTR(long: long),
+  C_5Cl-BTR(long: long),
+  C_56Me-1H-BTR(long: long),
+  C_BTR(long: long),
+  C_BTR-COOH(long: long),
+  C_5ABTR(long: long),
+  C_TBHB(long: long),
+)
+
 // This function gets your whole document as its `body` and formats
 // it as an article in the style of the IEEE.
 #let fmt(body) = {
