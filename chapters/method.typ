@@ -97,6 +97,43 @@
 
 TODO: Καμπύλες Βαθμονόμησης
 
+#let calibrate_plot(x, y, a, b, rsq, comp) = lq.diagram(
+  width: 100%,
+  height: 20%,
+  grid: (stroke-sub: 0.5pt + luma(95%)),
+  xaxis: (tick-args: (density: 50%)),
+  yaxis: (tick-args: (density: 40%), exponent: none),
+  xlabel: $bold("C"_#comp thin [mgL()])$,
+  ylabel: [*Ολοκλήρωση*],
+  legend: (position: top + left),
+  lq.scatter(
+    x, y,
+    size: 10pt,
+  ),
+  lq.line(
+    (0, b), (x.last(), a*x.last()+b),
+    stroke: orange,
+    label: text(9pt)[$y = #num(a, round: (precision: 2)) x + #num(b, round: (precision: 2))$, $R^2 = #num(rsq, round: (precision: 3))$],
+  )
+)
+
+#let cali_xs = ((1, 2, 3, 4, 5),)*14
+#let cali_ys = ((1, 2, 3, 4, 5),)*14
+#let cali_as = (1,)*14
+#let cali_bs = (0,)*14
+#let cali_rsqs = (0.99,)*14
+
+#let cali_data = (cali_xs, cali_ys, cali_as, cali_bs, cali_rsqs)
+
+#let caliplots = C_ALL().zip(..cali_data).map(((name, xs, ys, a, b, rsq)) => {
+  figure(calibrate_plot(xs, ys, a, b, rsq, name), caption: [Καμπύλη βαθμονόμησης #name])
+})
+
+#grid(
+  inset: (x: 10pt, y: 10pt),
+  ..caliplots
+)
+
 == Υπολογισμός Ανάκτησης (spikes)
 
 Σε κωνική φιάλη με καθαρό φίλτρο, εισέρχεται με ένεση από διακριβωμένη σύριγγα μίγμα όλων των ενώσεων, όπου κάθε ένωση έχει συγκέντρωση #mugmL(10). Ύστερα, ακολουθείται η παρακάτω διαδικασία της κατεργασίας δειγμάτων.
