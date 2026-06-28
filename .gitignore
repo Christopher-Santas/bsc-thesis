@@ -3,5 +3,7 @@
 /fonts
 *.otf
 *.jpg
+*.png
 *.zip
 *.svg
+python/locations.csv
