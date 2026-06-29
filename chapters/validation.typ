@@ -38,4 +38,8 @@ TODO: Πίνακες και διαγράμματα από αποτελέσματ
   )
 }
 
-#figure(bars_diag, caption: [Συγκεντρώσεις όλων των αναλυτών σε όλα τα δείγματα])
+
+#page(columns: 1, margin: (top: 70pt))[
+  #figure(bars_diag, caption: [Συγκεντρώσεις όλων των αναλυτών σε όλα τα δείγματα])
+  #align(center+horizon, figure(image("../python/map2.png"), caption: [Χάρτης με χρωματική διαβάθμιση συγκεντρώσεων TRECs]))
+]
