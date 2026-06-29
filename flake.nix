@@ -23,6 +23,10 @@
         buildInputs = runtimeLibs;
 
         LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath runtimeLibs;
+
+        shellHook = ''
+          unset SOURCE_DATE_EPOCH
+        '';
       };
     };
 }
