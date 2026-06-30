@@ -303,7 +303,8 @@
   place(center+top, scope: "parent", float: true)[
     #align(center+horizon, grid(inset: 1em,
       image("assets/nkua_1.svg", width: 70%),
-      image("assets/nkua_2.svg", width: 70%)
+      image("assets/nkua_2.svg", width: 70%),
+      [_ #date _]
     ))
   ]
   
