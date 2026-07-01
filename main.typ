@@ -1,6 +1,6 @@
 #import "lib.typ": *
 
-#show: fmt.with(cols: 1)
+#show: fmt.with(cols: 2)
 
 #include "chapters/intro.typ"
 #include "chapters/sourcesink.typ"
