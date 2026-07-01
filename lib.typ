@@ -100,7 +100,7 @@
 
 // This function gets your whole document as its `body` and formats
 // it as an article in the style of the IEEE.
-#let fmt(body) = {
+#let fmt(cols: 2, body) = {
   // Set document metadata.
   set document(title: title, author: authors.map(author => author.name))
 
@@ -156,10 +156,10 @@
   // Configure the page and multi-column properties.
   set columns(gutter: 12pt)
   set page(
-    columns: 2,
+    columns: cols,
     paper: paper-size,
     // The margins depend on the paper size.
-    margin: if paper-size == "a4" {
+    margin: if cols == 1 { auto } else if paper-size == "a4" {
       (x: 41.5pt, top: 80.51pt, bottom: 89.51pt)
     } else {
       (
@@ -311,7 +311,7 @@
   set page(footer: align(center, context { counter(page).display((page, total) => [#page από #total], both: true) }))
   page(columns: 1, outline())
 
-  set par(justify: true, first-line-indent: (amount: 1em, all: true), spacing: 0.5em, leading: 0.5em)
+  set par(justify: true, first-line-indent: (amount: 1em, all: true), spacing: if cols == 1 { 1.2em } else { 0.5em }, leading: if cols == 1 { 0.65em } else { 0.5em })
 
   // Display abstract and index terms.
   if abstract != none {
