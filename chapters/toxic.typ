@@ -1,13 +1,5 @@
 #import "../lib.typ": *
 
-#let blob(pos, label, tint: white, ..args) = node(
-	pos, align(center, label),
-	fill: tint.lighten(60%),
-	stroke: 1pt + tint.darken(20%),
-	corner-radius: 5pt,
-	..args,
-)
-
 #let diagram1 = diagram(
 	spacing: 8pt,
 	cell-size: (8mm, 10mm),

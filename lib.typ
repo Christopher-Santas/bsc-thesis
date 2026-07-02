@@ -5,7 +5,7 @@
 #import "@preview/oasis-align:0.3.3": *
 #import "@preview/sicons:16.0.0": sicon
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge
-#import fletcher.shapes: house, circle
+#import fletcher.shapes: house, circle, triangle, trapezium
 #import "@preview/touying:0.6.3": *
 #import themes.simple: *
 
@@ -98,6 +98,14 @@
   C_1OH-BTR(long: long),
   C_4OH-BTR(long: long),
   C_TBHB(long: long),
+)
+
+#let blob(pos, label, tint: white, ..args) = node(
+	pos, align(center + horizon, label),
+	fill: tint.lighten(60%),
+	stroke: 1pt + tint.darken(20%),
+	corner-radius: 5pt,
+	..args,
 )
 
 // This function gets your whole document as its `body` and formats
@@ -373,8 +381,8 @@
   )
 }
 
-#let slides-fmt(body) = {
-  show: simple-theme.with(aspect-ratio: "16-10")
+#let slides-fmt(handout: false, body) = {
+  show: simple-theme.with(aspect-ratio: "16-10", config-common(handout: handout))
 
   set text(lang: "el")
 
