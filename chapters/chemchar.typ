@@ -25,7 +25,7 @@
   C_4OH-BTR(long: true),C_4OH-BTR(),[26725-51-9],[#ce("C6H5N3O")],[135.12],[86400],
   C_TBHB(long: true),C_TBHB(),[3147-76-0],[#ce("C16H17N3O")],[267.33],[---],
   C_BTR-d4(long: true),C_BTR-d4(),[1185072-03-0],[#ce("C6HD4N3")],[123.15],[---],
-  C_BP-d4(long: true),C_BP-d4(),[22583-75-1],[#ce("C13D10O")],[192.28],[137],
+  C_BP-d10(long: true),C_BP-d10(),[22583-75-1],[#ce("C13D10O")],[192.28],[137],
 )
 
 #let skeletons = (
@@ -64,7 +64,7 @@
     caption: [Χημικός χαρακτηρισμός TRECs]
   )
 
-  Όλες οι πρότυπες ενώσεις έχουν προμηθευτεί από Toronto TODO
+  Όλες οι πρότυπες ενώσεις έχουν προμηθευτεί από την LGC Standards (συγκεκριμένα τις θυγατρικές Dr. Ehrenstorfer & Toronto Research Chemicals)
 ]
 
 #page(columns: 1, margin: (x: 1em, top: 70pt))[

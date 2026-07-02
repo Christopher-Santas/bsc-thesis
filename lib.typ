@@ -47,7 +47,6 @@
 #let index-terms = ("Ατμοσφαιρική Χημεία", "Ρύποι από Ελαστικά Οχημάτων", "Σκόνη από οδόστρωμα", "TRECs", "TWPs", "TWCs", "Κινόνες", "Βενζοτριαζόλες")
 #let bibliography = bibliography("refs.bib")
 
-#let V = zi.declare("V")
 #let mum = zi.declare("mum")
 #let kg = zi.declare("kg")
 #let mL = zi.declare("mL")
@@ -57,6 +56,9 @@
 #let mugmL = zi.declare("mug/mL")
 #let ngmL = zi.declare("ng/mL")
 #let mgL = zi.declare("mg/L")
+#let mLmin = zi.declare("mL/min")
+#let mins = zi.declare("min")
+#let volt = zi.declare("V")
 
 #let MeOH = ce("MeOH")
 #let DCM = "DCM"
@@ -79,7 +81,7 @@
 #let C_4OH-BTR(long: false) = if long [2H-βενζοτριαζολ-4-όλη] else [4-OH-BTR]
 #let C_TBHB(long: false) = if long [2-(1H-βενζοτριαζολ-2-υλο)-4-(tert-βουτυλο)φαινόλη] else [TBHB]
 #let C_BTR-d4(long: false) = if long [4,5,6,7-τετραδευτέριο-1H-βενζοτριαζόλη] else [BTR-d4]
-#let C_BP-d4(long: false) = if long [δις(2,3,4,5,6-πενταδευτεριοφαινυλο)μεθανόνη] else [BP-d10]
+#let C_BP-d10(long: false) = if long [δις(2,3,4,5,6-πενταδευτεριοφαινυλο)μεθανόνη] else [BP-d10]
 
 #let C_ALL(long: false) = (
   C_6PPD(long: long),
