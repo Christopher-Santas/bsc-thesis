@@ -71,6 +71,10 @@
 	S_DPPD-Q
 )))
 
+== Πηγές και Καταβόθρες
+
+#align(center + horizon, image("assets/environment.jpg", height: 85%))
+
 == Τρόποι εισχώρησης και κατανομής
 
 #let toxic1 = diagram(
@@ -92,50 +96,94 @@
 #align(center + horizon, toxic1)
 
 == Επιπτώσεις των μικροπλαστικών στον άνθρωπο
-#slide(self => [
-	#let (uncover, only, alternatives-cases) = utils.methods(self)
+#slide(self => {
+	let (uncover, only, alternatives-cases) = utils.methods(self)
 
-	#let toxic2(subslide) = diagram(
+	let toxic2(subslide) = diagram(
 		node-inset: 15pt,
-		// spacing: 4pt,
-		// cell-size: (16mm, 20mm),
-		// edge-stroke: 1pt,
-		// edge-corner-radius: 5pt,
-		// mark-scale: 70%,
+		spacing: 4pt,
+		cell-size: (16mm, 20mm),
 
 		blob((0,0), [Μικροπλαστικά\ στον Ανθρώπινο\ Οργανισμό], tint: yellow, name: <human>, shape: circle),
-	 //  pause,
 		blob((-1,1.5), [Ανοσοβιολογικό\ σύστημα], tint: if subslide == 1 { teal } else { orange }),
 		edge(auto, <human>),
-	 //  pause,
 		blob((-1.25,0), [Νευρικό\ σύστημα], tint: if subslide == 2 { teal } else { orange }),
 		edge(auto, <human>),
-	 //  pause,
 		blob((-1,-1.5), [Αναπνευστικό\ σύστημα], tint: if subslide == 3 { teal } else { orange }),
 		edge(auto, <human>),
-	 //  pause,
 		blob((0,-2.25), [Γαστρεντερικό\ σύστημα], tint: if subslide == 4 { teal } else { orange }),
 		edge(auto, <human>),
-	 //  pause,
 		blob((1,-1.5), [Καρδιαγγειακό\ σύστημα], tint: if subslide == 5 { teal } else { orange }),
 		edge(auto, <human>),
-	 //  pause,
 		blob((1.25,0), [Ενδοκρινικό\ σύστημα], tint: if subslide == 6 { teal } else { orange }),
 		edge(auto, <human>),
-	 //  pause,
 		blob((1,1.5), [Αναπαραγωγικό\ σύστημα], tint: if subslide == 7 { teal } else { orange }),
 		edge(auto, <human>),
-		// pause,
 		node((0,0)),
 	)
-	#let cases = if is-handout { 9 } else { 8 }
-	#alternatives-cases(
-		range(cases),
+
+	let cases = if is-handout { 8 } else { 7 }
+	alternatives-cases(
+		range(cases + 1),
 		case => {
 			align(center + horizon, toxic2(case))
-			for i in range(cases - 2) {
+			for i in range(cases - 1) {
 				pause
 			}
 		}
 	)
-])
+})
+
+== Οργανολογία
+
+#align(center + horizon, grid(
+	columns: (auto, 1fr),
+	image("assets/hplc.jpg", height: 85%),
+	[
+		#HPLC:
+		- a
+		- b
+		- c
+	],
+))
+
+== Δειγματοληψία
+
+== Χάρτης δειγματοληψίας
+
+#align(center + horizon, image("python/map1.png", height: 85%))
+
+== Χάρτης αποτελεσμάτων
+
+#align(center + horizon, image("python/map2.png", height: 85%))
+
+== Προτάσεις αποκατάστασης
+
+#slide(self => {
+	let (uncover, only, alternatives-cases) = utils.methods(self)
+
+	let remedy(subslide) = diagram(
+		node-inset: 15pt,
+		spacing: (2em, 30pt),
+
+		blob((-1,0), [Δημοσιονομική\ Προσέγγιση], tint: if subslide == 1 { teal } else { orange }, name: <o1>),
+		blob((1,0), [Επιστημονική\ Προσέγγιση], tint: if subslide == 2 { teal } else { orange }, name: <o2>),
+
+		blob((-1,1), [Περιορισμός Εκπομπών\ Εργοστασίων Γόμας], tint: yellow),
+		blob((-1,2), [Ενίσχυση Μέσων\ Σταθερής Τροχιάς], tint: yellow),
+		
+		blob((1,1), [Διερεύνηση Γόμας\ Φιλικής στο Περιβάλλον], tint: yellow),
+		blob((1,2), [Διερεύνηση Τρόπων\ Δέσμευσης των TRECs], tint: yellow),
+	)
+
+	let cases = if is-handout { 3 } else { 2 }
+	alternatives-cases(
+		range(cases + 1),
+		case => {
+			align(center + horizon, remedy(case))
+			for i in range(cases - 1) {
+				pause
+			}
+		}
+	)
+})
