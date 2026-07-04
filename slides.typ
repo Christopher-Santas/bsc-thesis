@@ -75,7 +75,27 @@
 
 #align(center + horizon, image("assets/environment.jpg", height: 85%))
 
-== Τρόποι εισχώρησης και κατανομής
+== Επιπτώσεις των TRECs
+
+#align(center + horizon, diagram(
+	node-inset: 15pt,
+
+	blob((0,0), [TWPs], tint: orange, name: <trecs>),
+	blob((-1,1), [Μικροπλαστικά], tint: yellow),
+	edge(auto, <trecs>),
+	edge(),
+	blob((-1,2), [Τοξικότητα για\ τον άνθρωπο], tint: yellow),
+	blob((1,1), [TRECs], tint: yellow),
+	edge(auto, <trecs>),
+	edge(),
+	blob((1,2), [Οικοτοξικότητα], tint: yellow),
+))
+
+#speaker-note[
+	Τα TWPs μπορούν ως ένα βαθμό να θεωρηθούν και μικροπλαστικά, καθώς έχουν πολλά κοινά χαρακτηριστικά μεταξύ τους, όπως ότι είναι και τα δύο ενώσεις μεγάλου μοριακού βάρους που προέρχονται από πολυμερή. Έτσι, η τοξικότητα των TWPs είναι παρόμοια με αυτή των μικροπλαστικών, και χρησιμοποιήθηκε για την αξιολόγηση της τοξικότητας για τον άνθρωπο. Η βιβλιογραφία έχει αποδείξει αρκετές φορές την οικοτοξικότητα των TRECs, ειδικά όσον αφορά το υδάτινο περιβάλλον.
+]
+
+== Τρόποι εισχώρησης και κατανομής μικροπλαστικών
 
 #let toxic1 = diagram(
 	node-inset: 15pt,
@@ -151,12 +171,13 @@
 
 #align(center + horizon, diagram(
 	node-inset: 15pt,
+	spacing: 45pt,
 
-	blob((0,0), [Συλλογή σκόνης\ από δρόμο], tint: orange),
+	blob((0,0), [Συλλογή σκόνης από δρόμο σε\ περίοδο ξηρασίας ($> mg(100)$)], tint: orange),
 	edge(),
-	blob((0,1), [Μεταφορά σκόνης\ δρόμου σε τρυβλίο], tint: orange),
+	blob((0,1), [Μεταφορά σκόνης δρόμου σε\ τρυβλίο αεροστεγώς κλειστό], tint: yellow),
 	edge(),
-	blob((0,2), [Αποθήκευση στο ψυγείο ($2 dash.fig 6 degree C$)], tint: orange),
+	blob((0,2), [Αποθήκευση στο ψυγείο ($2 dash.fig #h(0pt) 6 degree C$)], tint: teal),
 ))
 
 == Χάρτης δειγματοληψίας
@@ -209,10 +230,14 @@
 		blob((1,0), [Επιστημονική\ Προσέγγιση], tint: if subslide == 2 { teal } else { orange }, name: <o2>),
 
 		blob((-1,1), [Περιορισμός Εκπομπών\ Εργοστασίων Γόμας], tint: yellow),
+		edge(auto, <o1>),
 		blob((-1,2), [Ενίσχυση Μέσων\ Σταθερής Τροχιάς], tint: yellow),
+		edge(auto, <o1>),
 		
 		blob((1,1), [Διερεύνηση Γόμας\ Φιλικής στο Περιβάλλον], tint: yellow),
+		edge(auto, <o2>),
 		blob((1,2), [Διερεύνηση Τρόπων\ Δέσμευσης των TRECs], tint: yellow),
+		edge(auto, <o2>),
 	)
 
 	let cases = if is-handout { 3 } else { 2 }
