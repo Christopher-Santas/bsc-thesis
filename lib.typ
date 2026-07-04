@@ -108,6 +108,8 @@
 	..args,
 )
 
+#let to-bool(str) = if str == "true" { true } else if str == "false" { false }
+
 // This function gets your whole document as its `body` and formats
 // it as an article in the style of the IEEE.
 #let fmt(cols: 2, body) = {
@@ -381,8 +383,14 @@
   )
 }
 
-#let slides-fmt(handout: false, body) = {
-  show: simple-theme.with(aspect-ratio: "16-10", config-common(handout: handout))
+#let slides-fmt(handout: false, notes: false, body) = {
+  show: simple-theme.with(
+    aspect-ratio: "16-10",
+    config-common(
+      handout: handout,
+      show-notes-on-second-screen: if notes { right } else { none },
+    ),
+  )
 
   set text(lang: "el")
 

@@ -1,8 +1,9 @@
 #import "lib.typ": *
 #import "chapters/skel.typ": *
 
-#let is-handout = false
-#show: slides-fmt.with(handout: is-handout)
+#let is-handout = to-bool(sys.inputs.at("handout", default: "false"))
+#let is-notes = to-bool(sys.inputs.at("notes", default: "false"))
+#show: slides-fmt.with(handout: is-handout, notes: is-notes)
 
 #let diagram = touying-reducer.with(
   reduce: fletcher.diagram,
