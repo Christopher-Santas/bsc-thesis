@@ -153,6 +153,34 @@
 
 #align(center + horizon, image("python/map1.png", height: 85%))
 
+== Αποτελέσματα
+
+#let bars2 = {
+  lq.diagram(
+    width: 100%,
+    height: 85%,
+    margin: (x: 50%),
+    legend: (position: left + top),
+
+    ylabel: [C $[#ngmL()]$],
+
+    xaxis: (
+      ticks: ("PPDs", "BTRs").enumerate(start: 1),
+      subticks: none,
+    ),
+
+    lq.boxplot(
+      stroke: blue.darken(25%),
+      fill: blue.transparentize(50%),
+      width: 25%,
+      (1, 2, 3, 4, 5, 6, 7, 8, 9, 21, 19),
+      range(1, 30),
+    )
+  )
+}
+
+#align(center + horizon, bars2)
+
 == Χάρτης αποτελεσμάτων
 
 #align(center + horizon, image("python/map2.png", height: 85%))
