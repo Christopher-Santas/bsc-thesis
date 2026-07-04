@@ -149,6 +149,16 @@
 
 == Δειγματοληψία
 
+#align(center + horizon, diagram(
+	node-inset: 15pt,
+
+	blob((0,0), [Συλλογή σκόνης\ από δρόμο], tint: orange),
+	edge(),
+	blob((0,1), [Μεταφορά σκόνης\ δρόμου σε τρυβλίο], tint: orange),
+	edge(),
+	blob((0,2), [Αποθήκευση στο ψυγείο ($2 dash.fig 6 degree C$)], tint: orange),
+))
+
 == Χάρτης δειγματοληψίας
 
 #align(center + horizon, image("python/map1.png", height: 85%))
@@ -170,9 +180,10 @@
     ),
 
     lq.boxplot(
-      stroke: blue.darken(25%),
+      stroke: 2pt + blue.darken(25%),
       fill: blue.transparentize(50%),
       width: 25%,
+			median: 2pt + orange,
       (1, 2, 3, 4, 5, 6, 7, 8, 9, 21, 19),
       range(1, 30),
     )
@@ -215,3 +226,5 @@
 		}
 	)
 })
+
+= Ευχαριστούμε για την προσοχή σας!
