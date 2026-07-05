@@ -395,7 +395,13 @@
 
   set text(lang: "el")
 
-  
+  show table.cell.where(y: 0): strong
+  set table(
+    align: center + horizon,
+    fill: (_, y) => if calc.even(y) { rgb("EAF2F5") },
+    stroke: (_, y) => if y == 0 { (bottom: 1pt) }
+  )
+
   [
     = #title
     Ρύποι από ελαστικά οχημάτων
