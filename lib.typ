@@ -52,6 +52,7 @@
 #let mL = zi.declare("mL")
 #let muL = zi.declare("muL")
 #let mg = zi.declare("mg")
+#let ng = zi.declare("ng")
 #let gr = zi.declare("g")
 #let mugmL = zi.declare("mug/mL")
 #let ngmL = zi.declare("ng/mL")

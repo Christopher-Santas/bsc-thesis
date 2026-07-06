@@ -152,20 +152,20 @@
 		spacing: 4pt,
 		cell-size: (16mm, 20mm),
 
-		blob((0,0), [Μικροπλαστικά\ στον Ανθρώπινο\ Οργανισμό], tint: yellow, name: <human>, shape: circle),
-		blob((-1,1.5), [Ανοσοβιολογικό\ σύστημα], tint: if subslide == 1 { teal } else { orange }),
+		blob((0,0), [Μικροπλαστικά\ στον Ανθρώπινο\ Οργανισμό], tint: orange, name: <human>, shape: circle),
+		blob((-1,1.5), [Ανοσοβιολογικό\ σύστημα], tint: if subslide == 1 { teal } else { yellow }),
 		edge(auto, <human>),
-		blob((-1.25,0), [Νευρικό\ σύστημα], tint: if subslide == 2 { teal } else { orange }),
+		blob((-1.25,0), [Νευρικό\ σύστημα], tint: if subslide == 2 { teal } else if subslide < 2 { orange } else { yellow }),
 		edge(auto, <human>),
-		blob((-1,-1.5), [Αναπνευστικό\ σύστημα], tint: if subslide == 3 { teal } else { orange }),
+		blob((-1,-1.5), [Αναπνευστικό\ σύστημα], tint: if subslide == 3 { teal } else if subslide < 3 { orange } else { yellow }),
 		edge(auto, <human>),
-		blob((0,-2.25), [Γαστρεντερικό\ σύστημα], tint: if subslide == 4 { teal } else { orange }),
+		blob((0,-2.25), [Γαστρεντερικό\ σύστημα], tint: if subslide == 4 { teal } else if subslide < 4 { orange } else { yellow }),
 		edge(auto, <human>),
-		blob((1,-1.5), [Καρδιαγγειακό\ σύστημα], tint: if subslide == 5 { teal } else { orange }),
+		blob((1,-1.5), [Καρδιαγγειακό\ σύστημα], tint: if subslide == 5 { teal } else if subslide < 5 { orange } else { yellow }),
 		edge(auto, <human>),
-		blob((1.25,0), [Ενδοκρινικό\ σύστημα], tint: if subslide == 6 { teal } else { orange }),
+		blob((1.25,0), [Ενδοκρινικό\ σύστημα], tint: if subslide == 6 { teal } else if subslide < 6 { orange } else { yellow }),
 		edge(auto, <human>),
-		blob((1,1.5), [Αναπαραγωγικό\ σύστημα], tint: if subslide == 7 { teal } else { orange }),
+		blob((1,1.5), [Αναπαραγωγικό\ σύστημα], tint: if subslide == 7 { teal } else if subslide < 7 { orange } else { yellow }),
 		edge(auto, <human>),
 		node((0,0)),
 	)
@@ -349,7 +349,69 @@ $ "LOD" = (3.3 times "SD")/"Slope" $
 
 == Ανάκτηση
 
+#align(center + horizon, diagram(
+	node-inset: 15pt,
+	spacing: 30pt,
+
+	blob((0,0), [Μίγμα ενώσεων\ $ngmL(100)$ καθεμία], tint: orange, name: <mix>),
+	blob((-1,1), [Low Spike\ #ngmL(5)], tint: yellow),
+	edge(auto, <mix>),
+	edge(auto, <rep>),
+	blob((1,1), [High Spike\ #ngmL(50)], tint: yellow),
+	edge(auto, <mix>),
+	edge(auto, <rep>),
+	blob((0,2), [3 Επαναλήψεις\ $%"R" in [80, 120]$], tint: teal, name: <rep>),
+))
+
+#speaker-note[
+	Σε κωνική φιάλη με καθαρό φίλτρο, εισέρχεται με ένεση από διακριβωμένη σύριγγα μίγμα όλων των ενώσεων, όπου κάθε ένωση έχει συγκέντρωση $100 "ng/mL"$. Ύστερα, αραιώνουμε σε κατάλληλες συγκεντρώσεις για κάθε spike και ακολουθείται κανονικά η διαδικασία της προκατεργασίας δειγμάτων με τρεις επαναλήψεις. Αποδεκτές τιμές ανάκτησης $80 dash.fig #h(0pt) 120%$.
+]
+
 == Προκατεργασία
+
+#slide(self => {
+	let (uncover, only, alternatives-cases) = utils.methods(self)
+
+	let prep(subslide) = diagram(
+		node-inset: 15pt,
+		spacing: (30pt, 45pt),
+
+		blob((0,0), [$~ #h(0pt) mg(100)$\ κοσκινισμένης\ σκόνης], tint: if subslide == 1 { teal } else { yellow }),
+		edge(),
+		blob((1,0), [Κωνική φιάλη\ $ng(50)$ #C_6PPD-Q-d5()\ $ng(50)$ #C_BTR-d4()], tint: if subslide == 2 { teal } else if subslide < 2 { orange } else { yellow }),
+		edge(),
+		blob((2,0), [$mL(30)$ Εκχύλιση\ $2 times mL(10) #DCM$\ $1 times mL(10) #ACN$], tint: if subslide == 3 { teal } else if subslide < 3 { orange } else { yellow }),
+		edge(),
+		blob((2,1), [Φιλτράρισμα\ $mum(0.45)$], tint: if subslide == 4 { teal } else if subslide < 4 { orange } else { yellow }),
+		edge(),
+		blob((1,1), [Συμπύκνωση\ Φιλτράρισμα\ $mum(0.22)$], tint: if subslide == 5 { teal } else if subslide < 5 { orange } else { yellow }),
+		edge(),
+		blob((0,1), [Ξήρανση σε άζωτο\ Ανασύσταση με #ACN\ $ng(5)$ #C_BP-d10()], tint: if subslide == 6 { teal } else if subslide < 6 { orange } else { yellow })
+	)
+
+	let speakernotes = (
+		[Κοσκινίζουμε την σκόνη δείγματος και ζυγίζουμε από αυτή #mg(100).],
+		[Αυτή τοποθετείται πάνω σε καθαρό φίλτρο μέσα σε κωνική φιάλη. Προσθέτουμε στην κωνική φιάλη #muL(10) διαλύματος #C_6PPD-Q-d5() και #C_BTR-d4() συγκέντρωσης #mugmL(5) το καθένα.],
+		[Εκχυλίζουμε δύο φορές σε υπερήχους με #mL(10) #DCM κάθε φορά, και άλλη μία φορά με #mL(10) #ACN, συλλέγοντας συνολικά #mL(30) εκχυλίσματος.],
+		[To εκχύλισμα φιλτράρεται στα #mum(0.45) και εισέρχεται σε σφαιρική φιάλη.],
+		[Συμπυκνώνουμε το περιεχόμενο της σφαιρικής φιάλης χρησιμοποιώντας περιστροφικό εξατμιστή μέχρι περίπου #mL(0.5), και το παραλαμβάνουμε με πλαστική σύριγγα, μεταφέροντας το σε φιαλίδιο των #mL(6). Ξεπλένουμε την σφαιρική δύο φορές με #mL(1.0) #DCM, μεταφέροντας επίσης στο φιαλίδιο. Το περιεχόμενο του φιαλιδίου φιλτράρεται στα #mum(0.22).],
+		[Το περιεχόμενο της φιάλης συμπυκνώνεται υπό ρεύμα αζώτου μέχρι ξηρού. Η ανασύσταση γίνεται με #muL(100) διαλύματος #ACN με #C_BP-d10() συγκέντρωσης #ngmL(50). Ακολουθεί ανάλυση στο #HPLC.],
+	)
+
+	let cases = if is-handout { 7 } else { 6 }
+	alternatives-cases(
+		range(cases + 1),
+		case => {
+			align(center + horizon, prep(case))
+			for i in range(cases + 1) {
+				speaker-note(subslide: i, speakernotes.at(i - 1))
+			}
+			for i in range(cases - 1) {
+				pause
+			}
+		}
+	)
+})
 
 == Αποτελέσματα
 
