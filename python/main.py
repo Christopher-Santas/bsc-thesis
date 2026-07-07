@@ -1,7 +1,10 @@
 import plotly.express as px
 import pandas as pd
+import numpy as np
 
 df = pd.read_csv("locations.csv")
+
+df["con"] = np.log10(df["con"])
 
 
 def mymap(df, color=False):
