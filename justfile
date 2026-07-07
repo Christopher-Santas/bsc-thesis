@@ -24,4 +24,4 @@ slides-notes:
 slides-touying:
     touying compile slides.typ
 
-all: python compile slides slides-handout slides-notes slides-touying
+all: compile slides slides-handout slides-notes slides-touying
