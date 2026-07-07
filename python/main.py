@@ -4,7 +4,7 @@ import pandas as pd
 df = pd.read_csv("locations.csv")
 
 
-def map(df, color=False):
+def mymap(df, color=False):
     fig = px.scatter_map(
         df,
         lat="lat",
@@ -28,8 +28,8 @@ def map(df, color=False):
     return fig
 
 
-fig1 = map(df)
-fig1.show()
+fig1 = mymap(df)
+fig1.write_html("map1.html")
 
-fig2 = map(df, color=True)
-fig2.show()
+fig2 = mymap(df, color=True)
+fig2.write_html("map2.html")
