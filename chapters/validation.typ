@@ -176,5 +176,5 @@
     v(1em)
     figure(boxplot2, caption: [Συγκεντρώσεις PPDs και BTRs σε όλα τα δείγματα])
   })
-  #align(center+horizon, figure(image("../python/map2.png"), caption: [Χάρτης με χρωματική διαβάθμιση συγκεντρώσεων TRECs]))
+  #align(center+horizon, figure(image("../python/map2.png"), caption: [Χάρτης με χρωματική διαβάθμιση λογαριθμικών αθροισμάτων συγκεντρώσεων TRECs @plotly @osm]))
 ]
