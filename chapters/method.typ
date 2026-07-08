@@ -134,27 +134,26 @@
   lq.line(
     (0, b), (x.last(), a*x.last()+b),
     stroke: orange,
-    label: text(9pt)[$y = #num(a, round: (precision: 4)) x + #num(b, round: (precision: 4))$, $R^2 = #num(rsq, round: (precision: 4))$],
+    label: text(9pt)[$y = #num(a, round: (mode: "figures", precision: 4)) x + #num(b, round: (mode: "figures", precision: 4))$, $R^2 = #num(rsq, round: (precision: 4))$],
   )
 )
 
-#let linear-regression(pairs) = {
-  let len = pairs.len()
-  let xs = pairs.map(((x, y)) => x)
-  let ys = pairs.map(((x, y)) => y)
+#let linear-regression(xs, ys) = {
+  let xys = xs.zip(ys)
+  let len = xys.len()
 
-  let x_ = xs.sum() / len
-  let y_ = ys.sum() / len
+  let x_avg = xs.sum() / len
+  let y_avg = ys.sum() / len
 
-  let sum_dx2 = xs.map(x => calc.pow(x - x_, 2)).sum()
-  let sum_dy2 = ys.map(y => calc.pow(y - y_, 2)).sum()
-  let sum_dxdy = pairs.map(((x, y)) => (y - y_) * (x - x_)).sum()
+  let sum_dxsq = xs.map(x => calc.pow(x - x_avg, 2)).sum()
+  let sum_dysq = ys.map(y => calc.pow(y - y_avg, 2)).sum()
+  let sum_dxdy = xys.map(((x, y)) => (y - y_avg) * (x - x_avg)).sum()
 
-  let a = sum_dxdy / sum_dx2
-  let b = y_ - a * x_
-  let R = sum_dxdy / (calc.sqrt(sum_dx2) * calc.sqrt(sum_dy2))
+  let a = sum_dxdy / sum_dxsq
+  let b = y_avg - a * x_avg
+  let Rsq = sum_dxdy / (calc.sqrt(sum_dxsq) * calc.sqrt(sum_dysq))
 
-  (a, b, R)
+  (a, b, Rsq)
 }
 
 #let cali_names = (
@@ -188,7 +187,7 @@
 
 #let caliplots = cali_names.zip(cali_ys).map(((name, ys)) => {
   let xs = cali_xs.slice(0,ys.len())
-  figure(calibrate_plot(xs, ys, ..linear-regression(xs.zip(ys)), name), caption: [Καμπύλη βαθμονόμησης #name])
+  figure(calibrate_plot(xs, ys, ..linear-regression(xs, ys), name), caption: [Καμπύλη βαθμονόμησης #name])
 })
 
 #grid(
