@@ -27,7 +27,7 @@
   (([$#C_6PPD-Q()$],), (0,59.438366871431839,51.26063183475091,1051.986935220468,43.416350155874873)),
 )
 
-#let samples_data_outdoor = (samples_data.slice(0, 5) + samples_data.slice(6)).map(((comp, conc)) => (comp, (conc.at(1), conc.at(4), conc.at(6), conc.at(9), conc.at(11))))
+#let samples_data_outdoor = (samples_data.slice(0,5) + samples_data.slice(6)).map(((comp, conc)) => (comp, (conc.at(1), conc.at(4), conc.at(6), conc.at(9), conc.at(11))))
 
 #let samples_data_compare = samples_data_indoor.zip(samples_data_outdoor).map(((ind, outd)) => {
   assert(ind.at(0) == outd.at(0), message: "Check your sample data, something is off")
@@ -43,13 +43,17 @@
     ),
   )
 
+  show lq.selector(lq.legend): set grid(columns: 4)
+
   lq.diagram(
     width: 100%,
-    height: 20%,
+    height: if conc2 != none { 25% } else { 20% },
     margin: (x: 2%),
 
     xlabel: [Κωδικός δείγματος],
     ylabel: [#grid(columns: 2, gutter: 0.25em, comp.at(0), grid.cell(rowspan: comp.len(), $[ngmL()]$), ..comp.slice(1))],
+  
+    legend: if conc2 != none { (position: center + bottom, dy: -100%) },
   
     xaxis: (
       ticks: ticks.enumerate(),
@@ -60,6 +64,7 @@
       range(ticks.len()),
       width: if conc2 != none { 0.4 } else { 80% },
       offset: if conc2 != none { -0.2 },
+      label: if conc2 != none { [Indoor] },
       conc
     ),
 
@@ -68,6 +73,7 @@
         range(ticks.len()),
         width: 0.4,
         offset: 0.2,
+        label: [Outdoor],
         conc2
       )
     }
@@ -155,6 +161,12 @@
 #grid(
   inset: (x: 10pt, y: 10pt),
   ..barplots,
+)
+
+Από άλλη αντίστοιχη πτυχιακή εργασία, αλλά με δείγματα από τα κλιματιστικά από τις ίδιες περιοχές, μας δόθηκαν τα τελικά αποτελέσματα προς σύγκριση με αυτά των δειγμάτων του δρόμου.
+
+#grid(
+  inset: (x: 10pt, y: 10pt),
   ..barplots2,
 )
 
