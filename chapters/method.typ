@@ -21,7 +21,7 @@
   columns: 3*(1fr,),
   format: (none, auto, auto),
   stroke: (x, y) => if (y == 0 and x == 0) or (y == 1 and x >= 1 ) { (bottom: 1pt) },
-  table.header(table.cell(rowspan: 2)[Ένωση], table.cell(colspan: 2)[Αναλογία $m/z$], [Θεωρητικό], [Πειραματικό]),
+  table.header(table.cell(rowspan: 2)[Ένωση], table.cell(colspan: 2)[Αναλογία $m/z$], [*Θεωρητικό*], [*Πειραματικό*]),
   [#C_1OH-BTR()],[136.0511],[136.0501],
   [#C_4OH-BTR()],[136.0511],[136.0504],
   [#C_4TTR()],[134.0718],[134.0710],
@@ -40,7 +40,7 @@
   columns: (1fr, auto, auto, auto, auto),
   format: (none, auto, auto, auto, auto),
   stroke: (x, y) => if (y == 0 and x == 0) or (y == 1 and x >= 1 ) { (bottom: 1pt) },
-  table.header(table.cell(rowspan: 2)[Ένωση], table.cell(colspan: 4)[Παρατηρήσεις $[10^6]$], [#volt(100)], [#volt(200)], [#volt(300)], [#volt(400)]),
+  table.header(table.cell(rowspan: 2)[Ένωση], table.cell(colspan: 4)[Παρατηρήσεις $[10^6]$], [*#volt(100)*], [*#volt(200)*], [*#volt(300)*], [*#volt(400)*]),
   [#C_BTR()],[3.36],[7.83],[*9.20*],[9.16],
   [#C_4TTR()],[1.32],[4.40],[*5.50*],[5.15],
   [#C_5TTR()],[3.51],[6.43],[*7.69*],[7.51],
@@ -59,7 +59,7 @@
   columns: (1fr, auto, auto, auto, auto),
   format: (none, auto, auto, auto, auto),
   stroke: (x, y) => if (y == 0 and x == 0) or (y == 1 and x >= 1 ) { (bottom: 1pt) },
-  table.header(table.cell(rowspan: 2)[Ένωση], table.cell(colspan: 4)[Παρατηρήσεις $[10^6]$], [$X$], [$X+25$], [$X+50$], [$X+75$]),
+  table.header(table.cell(rowspan: 2)[Ένωση], table.cell(colspan: 4)[Παρατηρήσεις $[10^6]$], [*$X$*], [*$X+25$*], [*$X+50$*], [*$X+75$*]),
   [#C_BTR()\ $(X=volt(275))$],[7.17],[7.66],[*8.03*],[7.73],
   [#C_4TTR()\ $(X=volt(275))$],[2.17],[4.88],[*6.01*],[5.76],
   [#C_5TTR()\ $(X=volt(275))$],[5.48],[6.98],[*7.88*],[7.86],
@@ -126,7 +126,7 @@
   yaxis: (tick-args: (density: 40%), exponent: none),
   xlabel: $bold("C"_#comp thin [mgL()])$,
   ylabel: [*Ολοκλήρωση*],
-  legend: (position: top + left),
+  legend: (position: center + bottom, dy: -100%),
   lq.scatter(
     x, y,
     size: 10pt,
@@ -134,20 +134,61 @@
   lq.line(
     (0, b), (x.last(), a*x.last()+b),
     stroke: orange,
-    label: text(9pt)[$y = #num(a, round: (precision: 2)) x + #num(b, round: (precision: 2))$, $R^2 = #num(rsq, round: (precision: 3))$],
+    label: text(9pt)[$y = #num(a, round: (precision: 4)) x + #num(b, round: (precision: 4))$, $R^2 = #num(rsq, round: (precision: 4))$],
   )
 )
 
-#let cali_xs = ((1, 2, 3, 4, 5),)*14
-#let cali_ys = ((1, 2, 3, 4, 5),)*14
-#let cali_as = (1,)*14
-#let cali_bs = (0,)*14
-#let cali_rsqs = (0.99,)*14
+#let linear-regression(pairs) = {
+  let len = pairs.len()
+  let xs = pairs.map(((x, y)) => x)
+  let ys = pairs.map(((x, y)) => y)
 
-#let cali_data = (cali_xs, cali_ys, cali_as, cali_bs, cali_rsqs)
+  let x_ = xs.sum() / len
+  let y_ = ys.sum() / len
 
-#let caliplots = C_ALL().zip(..cali_data).map(((name, xs, ys, a, b, rsq)) => {
-  figure(calibrate_plot(xs, ys, a, b, rsq, name), caption: [Καμπύλη βαθμονόμησης #name])
+  let sum_dx2 = xs.map(x => calc.pow(x - x_, 2)).sum()
+  let sum_dy2 = ys.map(y => calc.pow(y - y_, 2)).sum()
+  let sum_dxdy = pairs.map(((x, y)) => (y - y_) * (x - x_)).sum()
+
+  let a = sum_dxdy / sum_dx2
+  let b = y_ - a * x_
+  let R = sum_dxdy / (calc.sqrt(sum_dx2) * calc.sqrt(sum_dy2))
+
+  (a, b, R)
+}
+
+#let cali_names = (
+  C_6PPD(),
+  C_6PPD-Q(),
+  C_DPPD-Q(),
+  C_CPPD-Q(),
+  C_BTR(),
+  [#C_4TTR() & #C_5TTR()],
+  C_56Me-1H-BTR(),
+  C_5Cl-BTR(),
+  C_5ABTR(),
+  [#C_1OH-BTR() & #C_4OH-BTR()],
+  C_TBHB(),
+)
+
+#let cali_xs = (1, 5, 10, 25, 50, 100)
+#let cali_ys = (
+  (0,0,0.005493619,0.043890621,0.245928253,0.884662114),
+  (0.035161668,0.189675198,0.350368566,0.894300533,1.801479916),
+  (0.006693756,0.050521346,0.088861581,0.205404184,0.350689647,0.954834828),
+  (0.026669958,0.124285874,0.231910502,0.59057947,1.184861435,2.013086622),
+  (0.074975672,0.334230762,0.651383788,1.643682481,3.471873626,7.557732988),
+  (0.413701258,1.251581937,2.275456679,5.326072813,10.07241439,19.09263924),
+  (0.153840816,0.749604863,1.512992477,4.288212963,7.255991946,13.91772329),
+  (0.009276811,0.109610746,0.218323565,0.524464222,1.120313967,2.306352475),
+  (0.028453297,0.129374394,0.253342882,0.577563447,1.025586926,2.038701547),
+  (0.112953208,0.446608585,0.871110551,1.912252545,3.713687573,6.979725805),
+  (0.009205561,0.036217021,0.07770638,0.176239641,0.369498113,0.965195242),
+)
+
+#let caliplots = cali_names.zip(cali_ys).map(((name, ys)) => {
+  let xs = cali_xs.slice(0,ys.len())
+  figure(calibrate_plot(xs, ys, ..linear-regression(xs.zip(ys)), name), caption: [Καμπύλη βαθμονόμησης #name])
 })
 
 #grid(
@@ -155,33 +196,30 @@
   ..caliplots
 )
 
-== Υπολογισμός Ορίου Ανίχνευσης (LOD)
+== Υπολογισμός Ορίου Ανίχνευσης (LOD) και Ορίου Ποσοτικοποίησης (LOQ)
 
-Για κάθε ένωση, γίνεται έξι φορές μέτρηση στο κατώτατο σημείο της καμπύλης βαθμονόμησης για την εύρεση του Ορίου Ανίχνευσης (LOD). Υπολογίζεται η τυπική απόκλιση (SD) των έξι μετρήσεων και έπειτα εφαρμόζεται ο ακόλουθος τύπος:
+Για κάθε ένωση, γίνεται έξι φορές μέτρηση στο κατώτατο σημείο της καμπύλης βαθμονόμησης. Υπολογίζεται η τυπική απόκλιση (SD) των έξι μετρήσεων και έπειτα εφαρμόζονται οι ακόλουθοι τύποι:
 $ "LOD" = (3.3 times "SD")/S $
+$ "LOQ" = (10 times "SD")/S $
 όπου $S$: η κλίση της καμπύλης βαθμονόμησης.
 
-TODO: Συμπλήρωση δεδομένων
-
 #figure(ztable(
-  columns: 2*(1fr,),
-  table.header([Ένωση], [LOD $[ngmL()]$]),
-  [#C_6PPD()],[TODO],
-  [#C_DPPD-Q()],[TODO],
-  [#C_CPPD-Q()],[TODO],
-  [#C_6PPD-Q-d5()],[TODO],
-  [#C_1OH-BTR()],[TODO],
-  [#C_4OH-BTR()],[TODO],
-  [#C_4TTR()],[TODO],
-  [#C_5TTR()],[TODO],
-  [#C_5Cl-BTR()],[TODO],
-  [#C_56Me-1H-BTR()],[TODO],
-  [#C_BTR()],[TODO],
-  [#C_BTR-d4()],[TODO],
-  [#C_BTR-COOH()],[TODO],
-  [#C_5ABTR()],[TODO],
-  [#C_TBHB()],[TODO],
-), caption: [LOD όλων των αναλυτών])
+  columns: (1fr, 0.4fr, 0.4fr),
+  format: (none, auto, auto),
+  stroke: (x, y) => if (y == 0 and x == 0) or (y == 1 and x >= 1 ) { (bottom: 1pt) },
+  table.header(table.cell(rowspan: 2)[Ένωση], table.cell(colspan: 2)[$[ngmL()]$], [*LOD*], [*LOQ*]),
+  [#C_6PPD()],[1.3],[4.3],
+  [#C_6PPD-Q()],[0.2],[0.7],
+  [#C_DPPD-Q()],[0.2],[0.7],
+  [#C_CPPD-Q()],[0.2],[0.5],
+  [#C_1OH-BTR() & #C_4OH-BTR()],[0.1],[0.3],
+  [#C_4TTR() & #C_5TTR()],[0.1],[0.3],
+  [#C_5Cl-BTR()],[0.5],[1.7],
+  [#C_56Me-1H-BTR()],[0.1],[0.3],
+  [#C_BTR()],[0.1],[0.3],
+  [#C_5ABTR()],[0.1],[0.3],
+  [#C_TBHB()],[0.2],[0.7],
+), caption: [LOD και LOQ όλων των αναλυτών])
 
 == Υπολογισμός Ανάκτησης (spikes)
 
@@ -198,9 +236,9 @@ TODO: Συμπλήρωση δεδομένων
   columns: 2*(1fr,),
   table.header([Ένωση], [Ανάκτηση [$%$]]),
   [#C_6PPD()],[TODO],
+  [#C_6PPD-Q()],[TODO],
   [#C_DPPD-Q()],[TODO],
   [#C_CPPD-Q()],[TODO],
-  [#C_6PPD-Q-d5()],[TODO],
   [#C_1OH-BTR()],[TODO],
   [#C_4OH-BTR()],[TODO],
   [#C_4TTR()],[TODO],
@@ -208,7 +246,6 @@ TODO: Συμπλήρωση δεδομένων
   [#C_5Cl-BTR()],[TODO],
   [#C_56Me-1H-BTR()],[TODO],
   [#C_BTR()],[TODO],
-  [#C_BTR-d4()],[TODO],
   [#C_BTR-COOH()],[TODO],
   [#C_5ABTR()],[TODO],
   [#C_TBHB()],[TODO],
