@@ -1,5 +1,6 @@
 #import "lib.typ": *
 #import "chapters/skel.typ": *
+#import "chapters/validation.typ": PPDs, BTRs
 
 #let is-handout = to-bool(sys.inputs.at("handout", default: "false"))
 #let is-notes = to-bool(sys.inputs.at("notes", default: "false"))
@@ -185,8 +186,10 @@
 		range(cases + 1),
 		case => {
 			align(center + horizon, toxic2(case))
-			for i in range(cases + 1) {
-				speaker-note(subslide: i, speakernotes.at(i - 1))
+			if not is-handout {
+				for i in range(cases + 1) {
+					speaker-note(subslide: i, speakernotes.at(i - 1))
+				}
 			}
 			for i in range(cases - 1) {
 				pause
@@ -403,8 +406,10 @@ $ "LOD" = (3.3 times "SD")/"Slope" $
 		range(cases + 1),
 		case => {
 			align(center + horizon, prep(case))
-			for i in range(cases + 1) {
-				speaker-note(subslide: i, speakernotes.at(i - 1))
+			if not is-handout {
+				for i in range(cases + 1) {
+					speaker-note(subslide: i, speakernotes.at(i - 1))
+				}
 			}
 			for i in range(cases - 1) {
 				pause
@@ -422,11 +427,15 @@ $ "LOD" = (3.3 times "SD")/"Slope" $
     margin: (x: 50%),
     legend: (position: left + top),
 
-    ylabel: [C $[#ngmL()]$],
+    ylabel: [$log("C" thin [#ngmL()])$],
 
     xaxis: (
       ticks: ("PPDs", "BTRs").enumerate(start: 1),
       subticks: none,
+    ),
+
+    yaxis: (
+      scale: "log",
     ),
 
     lq.boxplot(
@@ -434,8 +443,8 @@ $ "LOD" = (3.3 times "SD")/"Slope" $
       fill: blue.transparentize(50%),
       width: 25%,
 			median: 2pt + orange,
-      (1, 2, 3, 4, 5, 6, 7, 8, 9, 21, 19),
-      range(1, 30),
+      PPDs,
+      BTRs,
     )
   )
 }
@@ -444,7 +453,7 @@ $ "LOD" = (3.3 times "SD")/"Slope" $
 
 #speaker-note[
 	Σε αυτό το θηκόγραμμα παρουσιάζονται οι συγκεντρώσεις των PPDs και των BTRs.
-	TODO εάν παρατηρείται κάποια τάση.
+	Παρατηρείται πιο ομαλή διακύμανση των συγκεντρώσεων στα PPDs από ό,τι στα BTRs.
 ]
 
 == Χάρτης αποτελεσμάτων
@@ -452,8 +461,8 @@ $ "LOD" = (3.3 times "SD")/"Slope" $
 #align(center + horizon, image("python/map2.png", height: 85%))
 
 #speaker-note[
-	Εδώ βλέπουμε ένα χάρτη με διαβαθμισμένα σημεία ως προς το άθροισμα των συγκεντρώσεων των ρύπων.
-	TODO εάν παρατηρείται κάποια τάση.
+	Εδώ βλέπουμε ένα χάρτη με διαβαθμισμένα σημεία ως προς το λογάριθμο του αθροίσματος των συγκεντρώσεων των ρύπων.
+	Είναι εμφανές ότι στο κέντρο, οι συγκεντρώσεις είναι σημαντικά υψηλότερες από ό,τι στα προάστια.
 ]
 
 == Προτάσεις αποκατάστασης
@@ -489,8 +498,10 @@ $ "LOD" = (3.3 times "SD")/"Slope" $
 		range(cases + 1),
 		case => {
 			align(center + horizon, remedy(case))
-			for i in range(cases + 1) {
-				speaker-note(subslide: i, speakernotes.at(i - 1))
+			if not is-handout {
+				for i in range(cases + 1) {
+					speaker-note(subslide: i, speakernotes.at(i - 1))
+				}
 			}
 			for i in range(cases - 1) {
 				pause
