@@ -327,6 +327,7 @@
 
       v(1fr)
       align(center, emph(date))
+      align(center, [Άδεια: #link("https://creativecommons.org/licenses/by-nc/4.0/")[CC-BY-NC 4.0]])
     }
   )
 

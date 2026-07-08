@@ -32,5 +32,4 @@ It's adaptable and easy-to-use layout along with the refactorization abilities h
 
 == License
 
-TODO (CC BY-NC 4.0 for text and MPL 2.0 for code)
-
+The written manuscript, prose, and compiled PDF text of this thesis are licensed under the Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) license (LICENSE). All underlying data processing scripts and source code in the /python directory are licensed under the MIT License (LICENSE-CODE).
