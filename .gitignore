@@ -6,5 +6,6 @@
 *.jpg
 *.png
 *.zip
+*.tar.gz
 *.svg
 python/locations.csv
